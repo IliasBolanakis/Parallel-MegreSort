@@ -1,4 +1,4 @@
-# Parallel-Megre-Sort
+# Parallel-MegreSort
 An implementation of Merge Sort with ForkJoin Framework
 
 The ForkJoin framework is built to design divide and conquer algorithms
