@@ -36,7 +36,7 @@ public class ParallelSort{
      * @param array Array to be sorted
      */
     public static void sort(Object[] array){
-        check(array); // 
+        check(array); 
         // create pool and execute task
         ForkJoinPool pool = ForkJoinPool.commonPool();
         pool.invoke(new MergeSortTask(array, 0, array.length-1, null));
