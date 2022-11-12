@@ -15,13 +15,11 @@ import java.util.concurrent.RecursiveAction;
 public class ParallelSort{
 
     private ParallelSort(){} // private constructor (no point in creating instances)
-
+    
     /**
-     * Sorting method that sorts in natural order
-     * @param array Array to be sorted
-     */
-    public static void sort(Object[] array){
-
+    * Performs for basics checks to prevent possible errors/exceptions
+    */
+    private static void check(Object[] array){
         if(array == null) // Check is array is null
             throw new NullPointerException("Array is null");
 
@@ -31,7 +29,14 @@ public class ParallelSort{
         Class<?> arrayClass = array[0].getClass(); //Check if arrays' elements implement Comparable
         if (! Comparable.class.isAssignableFrom(arrayClass))
             throw new IllegalArgumentException("Arrays' elements don't implement Comparable");
-
+    }
+    
+    /**
+     * Sorting method that sorts in natural order
+     * @param array Array to be sorted
+     */
+    public static void sort(Object[] array){
+        check(array); // 
         // create pool and execute task
         ForkJoinPool pool = ForkJoinPool.commonPool();
         pool.invoke(new MergeSortTask(array, 0, array.length-1, null));
@@ -44,7 +49,7 @@ public class ParallelSort{
      * @param comp Comparator to be used
      */
     public static void sort(Object[] array ,Comparator comp){
-
+        check(array);
         //create pool and execute task
         ForkJoinPool pool = ForkJoinPool.commonPool();
         pool.invoke(new MergeSortTask<>(array, 0, array.length-1, comp));
